@@ -1,5 +1,11 @@
-Using your favorite browser navigate to your facebook account. Using the developers tools, let a celebrity comments on your facebook wall or post. Take the screenshot and share it with your friends and submit it for evaluation too.
+Let’s improve our Assignment 2 with the help of bootstrap layout and grid system. Your output should look like this.
 
-Live Version here
+https://drive.google.com/file/d/1KMHt3s4PtUQco8-a843rHvaW3XJtfD8-
 
-https://drive.google.com/file/d/15OwUTTwttjY1X-0zaWH1ra432iz4Gio_
+Steps to complete this assignment:
+
+step 1 - Clone the basic bootstrap template by followin command - 
+
+git clone https://github.com/BlackrockDigital/startbootstrap-bare.git assignment4
+
+this will download (clone) minimum code in assignment4 folder. go ahead and edit the code in index.html to acheive the required output.
