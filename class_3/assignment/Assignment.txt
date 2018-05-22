@@ -1,0 +1,5 @@
+Using your favorite browser navigate to your facebook account. Using the developers tools, let a celebrity comments on your facebook wall or post. Take the screenshot and share it with your friends and submit it for evaluation too.
+
+Live Version here
+
+https://drive.google.com/file/d/15OwUTTwttjY1X-0zaWH1ra432iz4Gio_
