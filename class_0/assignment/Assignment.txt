@@ -1,0 +1,1 @@
+Install git in your machine and create a repository hello-git in your machine. Then create a text file git-commands.txt inside repository with your favorite text editor. Add all the git commands and their function in the file. And finally upload your repository to GitHub.
