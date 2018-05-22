@@ -1,0 +1,7 @@
+Try to make Assignment 1 look a lot better using the CSS that we’ve been learning. See what we can do with backgrounds, margins and size settings to get something like this:
+
+https://drive.google.com/file/d/1JFCbUvkBCp9t1FlkdtiiaOExSd78eU7B/view
+
+Live version can be found here
+
+http://acadview-webd-assignment2.surge.sh/
