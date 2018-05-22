@@ -1,0 +1,11 @@
+Let’s improve our Assignment 2 with the help of bootstrap layout and grid system. Your output should look like this.
+
+https://drive.google.com/file/d/1KMHt3s4PtUQco8-a843rHvaW3XJtfD8-
+
+Steps to complete this assignment:
+
+step 1 - Clone the basic bootstrap template by followin command - 
+
+git clone https://github.com/BlackrockDigital/startbootstrap-bare.git assignment4
+
+this will download (clone) minimum code in assignment4 folder. go ahead and edit the code in index.html to acheive the required output.
