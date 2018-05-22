@@ -1,0 +1,7 @@
+Let’s improve our Assignment 4 with the help of bootstrap Carousel (Slider). Your output should look like this.
+
+
+
+Live version here
+
+http://acadview-webd-assignment6.surge.sh
