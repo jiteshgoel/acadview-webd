@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quadratic Equation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+        padding-top: 54px;
+      }
+      @media (min-width: 992px) {
+        body {
+          padding-top: 56px;
+        }
+      }
+
+    </style>
+
+  </head>
+
+  <body onload="init();">
+
+    <div class="container">
+      <h2>Second Degree Equations</h2>
+
+      <div class="well">
+          <h3>Quadratic Equation:
+              <span id="a">a</span>x
+              <sup>2</sup> +
+              <span id="b">b</span>x +
+              <span id="c">c</span>
+          </h3>
+          <h4>Enter the coefficients of a, b and c in the field below.</h4>
+
+          <div class="form-group">
+              <label for="valueA">Value of a: </label>
+              <input type="number" min="0" placeholder="1" class="form-control" id="valueA" onchange="updateEquation()" required/>
+          </div>
+          <div class="form-group">
+              <label for="valueB">Value of b: </label>
+              <input type="number" min="0" placeholder="1" class="form-control" id="valueB" onchange="updateEquation()" required/>
+          </div>
+          <div class="form-group">
+              <label for="valueC">Value of c: </label>
+              <input type="number" min="0" placeholder="1" class="form-control" id="valueC" onchange="updateEquation()" required/>
+          </div>
+          <button class="btn btn-primary" onclick="solve()">Solve Equation</button>
+      </div>
+
+      <div class="well">
+          Resut:
+          <span id="result"></span>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="scripts.js"></script>
+
+  </body>
+
+</html>
