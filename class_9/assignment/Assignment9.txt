@@ -1,0 +1,6 @@
+Write a small game that will display a word taken from an array, randomly, and you will have to type the letters of this word as fast as you can. A bit like the "type of the dead" game (look on YouTube). You can imagine the evolution such as choosing the level, start with 3 letter words, 4 letter words, etc. 
+Choose a topic (medicine, with very difficult words to spell, etc.). If you look at the end of the course, you will see how to work with graphics and animation, you can also imagine a graphic version of this game.
+
+Live version here
+
+http://acadview-webd-assignment9.surge.sh/
