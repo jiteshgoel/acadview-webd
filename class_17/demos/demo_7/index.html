@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Class 17 demo</title>
+	</head>
+	
+	<body>
+	<h3>Example 1 (click on the label, not on the input field to see the effect)</h3>
+		<label for="first_name">Your First Name</label>
+		<input id="first_name" type="text" name="fname"/>
+		
+	<h3>Example 2 (click on the label "Subscribe to newsletter" to see the effect)</h>
+		<label for="firstname">First name:</label>
+		<input type="text" name="firstname" id="firstname"><br>
+		<label for="subscribe">Subscribe to newsletter</label>
+		<input type="checkbox" name="subscribe" id="subscribe">
+	<h3>4 Source code for an example of "Submit" and "Cancel" buttons:<h/3>
+		<button type="submit">Submit</button>
+		<button type="button">Cancel</button>
+		 
+		<input type="submit" value="Submit">
+		<input type="button" value="Cancel">
+	<h3>5 - Labeling text areas Enter your address:</h3>
+		<label for="address">Enter your address:</label>
+		<br>
+		<textarea id="address" name="addresstext"></textarea>
+	<h3>Example 1 - Radio buttons</h3>
+			<fieldset>
+		   <legend>Output format</legend>
+			  <div>
+				 <input type="radio" name="format" id="txt" value="txt" checked>
+				 <label for="txt">Text file</label>
+			  </div>
+		   <div>
+			  <input type="radio" name="format" id="csv" value="csv">
+			  <label for="csv">CSV file</label>
+		   </div>
+			[…]
+			</fieldset>
+		
+		<h3>Example 2 - Checkboxes</h3>
+		<fieldset>
+			   <legend>I want to receive</legend>
+			   <div>
+				  <input type="checkbox" name="newsletter" id="check_1">
+				  <label for="check_1">The weekly newsletter</label>
+			   </div>
+			   […]
+			</fieldset>
+				</body>
+</html>
