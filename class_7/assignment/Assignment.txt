@@ -1,0 +1,5 @@
+create a webpage with a button and a javascript function calculateSquare() should be called when click event occured on that button and display the square of the x = 10 on webpage. Try changing the value of x in console and click button again.
+
+Live version here
+
+http://acadview-webd-assignment7.surge.sh/
