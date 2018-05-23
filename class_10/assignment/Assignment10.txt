@@ -1,0 +1,5 @@
+Write a small contact manager. User should be able to input his/her name and contact no in the text box and it should be added/saved in a list. Additionally use bootstrap library for proper layout and styling.
+
+Live version here
+
+http://acadview-webd-assignment10.surge.sh/
