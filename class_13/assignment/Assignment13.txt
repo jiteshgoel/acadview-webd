@@ -1,0 +1,11 @@
+Let's add some sound in the assignment 11 follow these steps to acheive it.
+
+Step 1: clone the boilerplate code by following command on your terminal/git bash
+
+git clone http://acadview-webd-assignment13.surge.sh/
+
+Step 2: Inside downloaded folder open scripts.js file and follow instructions in TODO 1, TODO 2, TODO 3 comment sections
+
+Live Version Here
+
+http://acadview-webd-assignment13.surge.sh/

@@ -5,3 +5,7 @@ Step 1: clone boilerplate code by following command:
 https://github.com/kumarsandeep91/GallerySample.git
 
 follow TODO: instructions in scripts.js file
+
+Live version here
+
+http://acadview-webd-assignment12.surge.sh/
