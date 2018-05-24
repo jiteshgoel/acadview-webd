@@ -1,0 +1,7 @@
+An interactive picture album browser:
+
+Step 1: clone boilerplate code by following command:
+
+https://github.com/kumarsandeep91/GallerySample.git
+
+follow TODO: instructions in scripts.js file

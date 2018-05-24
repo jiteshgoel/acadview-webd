@@ -1,5 +1,0 @@
-write a piece of code that solves second degree equations. You pass the a, b, c parameters of: ax2 + bx + c, and the solve function will compute delta = b2 - 4a*c. Test the sign of delta, and if it's equal to zero, then display (in the console, or better, in the page) the roots of the equation.
-
-Live version here
-
-http://acadview-webd-assignment8.surge.sh/

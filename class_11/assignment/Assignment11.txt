@@ -1,0 +1,13 @@
+Download assignment boilerplate code by following command on terminal/git bash
+
+git clone https://github.com/kumarsandeep91/SampleGame.git
+
+navigate inside SampleGame folder just downloaded and Try to draw a small monster instead of a red square for the player. 
+
+(Optional) Do the same thing with the balls - make some improvements!
+
+Note: Find TODO comment in index.html and scripts.js for help
+
+Live version here
+
+http://acadview-webd-assignment11.surge.sh/

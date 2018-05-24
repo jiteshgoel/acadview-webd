@@ -1,45 +1,339 @@
-var coefA, coefB, coefC, result;
+// useful to have them as global variables
+var canvas, ctx, w, h; 
+var mousePos;
 
-function init(){
-    coefA = document.querySelector("#valueA");
-    coefB = document.querySelector("#valueB");
-    coefC = document.querySelector("#valueC");
-    result = document.querySelector("#result");
+// an empty array!
+var balls = []; 
+var initialNumberOfBalls;
+var globalSpeedMutiplier = 1;
+var colorToEat = 'red';
+var wrongBallsEaten = goodBallsEaten = 0;
+var numberOfGoodBalls;
+var level = 1;
+var displayLevel = document.getElementById("level");
+var health;
+var displayHealth = document.getElementById("health");
+var size = 30;
+var points = 0;
+var gameState="";
+
+var player = {
+  x:10,
+  y:10,
+  width:20,
+  height:20,
+  color:'red'
 }
 
-function updateEquation(){
-    document.getElementById("a").innerHTML = coefA.value==1?"":coefA.value;
-    document.getElementById("b").innerHTML = coefB.value==1?"":coefB.value;
-    document.getElementById("c").innerHTML = coefC.value;
+window.onload = init();
+
+function init() {
+    // called AFTER the page has been loaded
+    canvas = document.querySelector("#myCanvas");  
+    gameState = "gameRunning";    
+    // often useful
+    w = canvas.width; 
+    h = canvas.height;
+    health=100;
+  
+    // important, we will draw with this object
+    ctx = canvas.getContext('2d');  
+    // start game with 10 balls, balls to eat = red balls
+    startGame(10);  
+    // add a mousemove event listener to the canvas
+    canvas.addEventListener('mousemove', mouseMoved);
+    window.addEventListener('keydown', restart);
+    // ready to go !
+    mainLoop();
+};
+
+function startGame(nb) {
+  do {
+    balls = createBalls(nb);
+    initialNumberOfBalls = nb;
+    numberOfGoodBalls = countNumberOfGoodBalls(balls, colorToEat);
+  } while(numberOfGoodBalls === 0);
+  
+  wrongBallsEaten = goodBallsEaten = 0;
 }
 
-function solve(){
-    if(eval(coefA.value) !== undefined && eval(coefB.value) !== undefined && eval(coefC.value) !== undefined){
-        let a = coefA.value, b = coefB.value, c = coefC.value;
-        let discriminant = getDiscriminant(a, b, c);
-        if (discriminant<0){
-            result.innerHTML = "There is no real root.";
-        }
-        else if (discriminant===0){
-            let root1 = (-b+Math.sqrt(discriminant))/(2*a);
-            let root2 = (-b-Math.sqrt(discriminant))/(2*a);
-            result.innerHTML = "There is real and equal root.<br>";
-            result.innerHTML += "x<sub>1</sub>: " + root1 + "<br>";
-            result.innerHTML += "x<sub>2</sub>: " + root2 + "<br>";
-        }
-        else{
-            let root1 = (-b+Math.sqrt(discriminant))/(2*a);
-            let root2 = (-b-Math.sqrt(discriminant))/(2*a);
-            result.innerHTML = "There is real and distinct root.<br>";
-            result.innerHTML += "x<sub>1</sub>: " + root1 + "<br>";
-            result.innerHTML += "x<sub>2</sub>: " + root2 + "<br>";
-        }
+function countNumberOfGoodBalls(balls, colorToEat) {
+  var nb = 0;
+  
+  balls.forEach(function(b) {
+    if(b.color === colorToEat)
+      nb++;
+  });
+  
+  return nb;
+}
+
+function changeNbBalls(nb) {
+  startGame(nb);
+}
+
+function changeColorToEat(color) {
+  colorToEat = color;
+}
+
+function changePlayerColor(color) {
+  player.color = color;
+}
+
+function changeBallSpeed(coef) {
+    globalSpeedMutiplier = coef;
+}
+
+function mouseMoved(evt) {
+    mousePos = getMousePos(canvas, evt);
+}
+
+function getMousePos(canvas, evt) {
+    // necessary work in the canvas coordinate system
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
+
+function movePlayerWithMouse() {
+  if(mousePos !== undefined) {
+    player.x = mousePos.x;
+    player.y = mousePos.y;
+  }
+}
+
+function mainLoop() {
+    displayLevel.innerHTML =  "Level :" + level;
+    displayHealth.value = health;
+    
+    if(health > 0){
+        // 1 - clear the canvas
+        ctx.clearRect(0, 0, w, h);
+        
+        // draw the ball and the player
+        drawFilledRectangle(player);
+        drawAllBalls(balls);
+        drawBallNumbers(balls);
+
+        // animate the ball that is bouncing all over the walls
+        moveAllBalls(balls);
+        
+        movePlayerWithMouse();
+        
+        // ask for a new animation frame
+        requestAnimationFrame(mainLoop);
+    }else{ 
+    
+        ctx.clearRect(0, 0, w, h);
+        ctx.font="20px Arial";   
+        ctx.fillText("Game Over!", 210, 30);    
+        ctx.fillText("Your points: " + points, 210, 50);
+        ctx.fillText("Press space to start again", 210, 70);
+        gameState = "displayGameOverMenu";
+    }    
+}
+
+function restart(evt){
+    if(gameState == "displayGameOverMenu" && evt.key == ' '){
+        init();
     }
-    else{
-        result.innerHTML = "Please fill in all 3 coefficient";
-    }
 }
 
-function getDiscriminant(a, b, c){
-    return Math.pow(b, 2)-4*a*c;
+
+// Collisions between rectangle and circle
+function circRectsOverlap(x0, y0, w0, h0, cx, cy, r) {
+   var testX=cx;
+   var testY=cy;
+   if (testX < x0) testX=x0;
+   if (testX > (x0+w0)) testX=(x0+w0);
+   if (testY < y0) testY=y0;
+   if (testY > (y0+h0)) testY=(y0+h0);
+   return (((cx-testX)*(cx-testX)+(cy-testY)*(cy-testY))< r*r);
+}
+
+function createBalls(n) {
+  // empty array
+  var ballArray = [];
+  
+  // create n balls
+  for(var i=0; i < n; i++) {
+     var b = {
+        x:w/2,
+        y:h/2,
+        radius: 5 + size * Math.random(), // between 5 and 35
+        speedX: -5 + 10 * Math.random(), // between -5 and + 5
+        speedY: -5 + 10 * Math.random(), // between -5 and + 5
+        color:getARandomColor(),
+      }
+     // add ball b to the array
+     ballArray.push(b);
+    }
+  // returns the array full of randomly created balls
+  return ballArray;
+}
+
+function getARandomColor() {
+  var colors = ['red', 'blue', 'cyan', 'purple', 'pink', 'green', 'yellow'];
+  // a value between 0 and color.length-1
+  // Math.round = rounded value
+  // Math.random() a value between 0 and 1
+  var colorIndex = Math.round((colors.length-1)*Math.random()); 
+  var c = colors[colorIndex];
+  
+  // return the random color
+  return c;
+}
+
+function drawBallNumbers(balls) {
+  ctx.save();
+  ctx.font="20px Arial";
+  
+  if(health <= 0) {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillText("Game Over!", 210, 30);    
+    ctx.fillText("Your points: " + points, 210, 30);
+    document.onkeyup =  function(evt){
+        if(evt.key == 'Space'){
+            init();
+        }
+    };
+    canvas.onclick =  function(evt){
+        if(evt.key == 'Space'){
+            init();
+        }
+    };
+  } else if(goodBallsEaten === numberOfGoodBalls) {
+    //ctx.fillText("You Win! Final score : " + (initialNumberOfBalls - wrongBallsEaten), 20, 30);
+    initialNumberOfBalls++;
+    level++;
+    globalSpeedMutiplier += 0.1;
+    size--;
+    startGame(initialNumberOfBalls);
+    ctx.restore();
+  } else {
+    if(health > 50){
+        displayHealth.className = "";
+    }else if( health > 30){
+        displayHealth.className = "medium";
+    }else if(health > 10){
+        displayHealth.className = "bad";
+    }else{
+        displayHealth.className = "vbad";
+    }
+    ctx.restore();
+  }
+  
+}
+
+function drawAllBalls(ballArray) {
+    ballArray.forEach(function(b) {
+      drawFilledCircle(b);
+    });
+}
+
+function moveAllBalls(ballArray) {
+  // iterate on all balls in array
+  balls.forEach(function(b, index) {
+      // b is the current ball in the array
+      b.x += (b.speedX * globalSpeedMutiplier);
+      b.y += (b.speedY * globalSpeedMutiplier);
+  
+      testCollisionBallWithWalls(b); 
+    
+      testCollisionWithPlayer(b, index);
+  });
+}
+
+function testCollisionWithPlayer(b, index) {
+  if(circRectsOverlap(player.x, player.y,
+                     player.width, player.height,
+                     b.x, b.y, b.radius)) {
+    
+    if(b.color === colorToEat) {
+      goodBallsEaten += 1;
+      points += level;
+    } else {
+      wrongBallsEaten += 1;
+      health--;
+    }
+    
+    balls.splice(index, 1);
+
+  }
+}
+
+function testCollisionBallWithWalls(b) {
+    // COLLISION WITH VERTICAL WALLS ?
+    if((b.x + b.radius) > w) {
+    // the ball hit the right wall
+    // change horizontal direction
+    b.speedX = -b.speedX;
+    
+    // put the ball at the collision point
+    b.x = w - b.radius;
+  } else if((b.x -b.radius) < 0) {
+    // the ball hit the left wall
+    // change horizontal direction
+    b.speedX = -b.speedX;
+    
+    // put the ball at the collision point
+    b.x = b.radius;
+  }
+  
+  // COLLISIONS WTH HORIZONTAL WALLS ?
+  // Not in the else as the ball can touch both
+  // vertical and horizontal walls in corners
+  if((b.y + b.radius) > h) {
+    // the ball hit the right wall
+    // change horizontal direction
+    b.speedY = -b.speedY;
+    
+    // put the ball at the collision point
+    b.y = h - b.radius;
+  } else if((b.y -b.radius) < 0) {
+    // the ball hit the left wall
+    // change horizontal direction
+    b.speedY = -b.speedY;
+    
+    // put the ball at the collision point
+    b.Y = b.radius;
+  }  
+}
+
+function drawFilledRectangle(r) {
+    // GOOD practice: save the context, use 2D trasnformations
+    ctx.save();
+  
+    // translate the coordinate system, draw relative to it
+    ctx.translate(r.x, r.y);
+  
+    ctx.fillStyle = r.color;
+    // (0, 0) is the top left corner of the monster.
+    ctx.fillRect(0, 0, r.width, r.height);
+
+    // TODO: Acadview Solution
+    var img = document.getElementById("jugador");
+    ctx.drawImage(img,0,0,40,40);
+  
+    // GOOD practice: restore the context
+    ctx.restore();
+}
+
+function drawFilledCircle(c) {
+    // GOOD practice: save the context, use 2D trasnformations
+    ctx.save();
+  
+    // translate the coordinate system, draw relative to it
+    ctx.translate(c.x, c.y);
+  
+    ctx.fillStyle = c.color;
+    // (0, 0) is the top left corner of the monster.
+    ctx.beginPath();
+    ctx.arc(0, 0, c.radius, 0, 2*Math.PI);
+    ctx.fill();
+ 
+    // GOOD practice: restore the context
+    ctx.restore();
 }
