@@ -1,0 +1,10 @@
+
+Step 1: clone the boilerplate code by following commands on your terminal/git bash:
+
+git clone https://github.com/kumarsandeep91/ES6Demo.git
+
+Step 2: Inside ES6Demo folder just downloaded/cloned open index.html and follow TODO comments inside script tag.
+
+Live version here
+
+http://acadview-webd-assignment15.surge.sh/

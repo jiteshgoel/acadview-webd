@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ES6 Classes</title>
+	<meta charset="utf-8" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="cForm">
+        <h3>Add a new contact</h3>
+            Name : <input id="name" type="text" name="name">
+            <br><br />
+            Number : <input id="number" type="text" name="number">
+            <br><br>
+        <button type="button" onclick="AddToList()">Add Contact</button>
+    </div>
+
+    <div id="cList">
+        <h3>Contact list</h3>
+        Filter for : <input id="filter" type="text">
+        <button type="button" onclick="Filter()">Filter</button>
+        <br /><br />
+        <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                </tr>
+        </table>
+        
+        <div id="gList">
+        </div>
+    </div>
+
+    <!-- Load Babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Your custom script here -->
+    <script type="text/babel">
+        var testName; 
+        var contactList; 
+        var contlist;
+
+        class Contact
+        {
+            constructor (name, phone)
+            {
+                this.name = name;
+                this.number = phone;
+            }
+        }
+
+        class ContMan
+        {
+            constructor ()
+            {
+                this.contacts = [];
+            }
+
+            Add(item)
+            {
+                this.contacts.push(item);
+            }
+
+            List(filter)
+            {
+                var myList = "<table>";
+                for (let i = 0; i < this.contacts.length; i++)
+                {
+                    if (filter ==="" || this.contacts[i].name.toUpperCase().includes(String(filter).toUpperCase()) || this.contacts[i].number.toUpperCase().includes(String(filter).toUpperCase()))
+                    {
+                        myList += "<tr> <td>" + this.contacts[i].name + "</td> <td>" + this.contacts[i].number + "</td>";
+                    }
+                };
+                myList += "</table>";
+                return (myList);
+            }
+        }
+
+
+
+
+
+        function AddToList()
+        {
+            let newItem = new Contact(document.getElementById("name").value, document.getElementById("number").value);
+            if((newItem.name=="") || (newItem.phone ==""))
+            {
+                alert("name and number can't be empty");
+            }
+            else
+            {
+                contlist.Add(newItem);
+                document.getElementById("gList").innerHTML = contlist.List("");
+            }
+            document.getElementById("filter").value = "";
+
+
+        }
+
+        function Filter() {
+            console.log("Filter started");
+
+            let f = document.getElementById("filter").value;
+            console.log(f);
+            if ((typeof (f) == undefined || f === null || f == "")) {
+                f = "";
+            }
+            document.getElementById("gList").innerHTML = contlist.List(f);
+
+        }
+
+
+        window.onload = function init() {
+
+            contlist = new (ContMan);
+
+            var newItem = new Contact("Name 1", "number1");
+            contlist.Add(newItem);
+            var newItem2 = new Contact("Name 2", "number2");
+            contlist.Add(newItem2);
+
+            document.getElementById("gList").innerHTML = contlist.List("");
+        }
+    </script>
+</body>
+</html>
