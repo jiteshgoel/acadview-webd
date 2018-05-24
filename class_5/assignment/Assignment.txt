@@ -1,5 +1,5 @@
-Normal Version:
-
 Create a JavaScript function named greetingJavascript, which will accept a message and display that message in developer console. Try to test your program first in browser console before submiting it for evaluation.
 
 Live version here
+
+http://acadview-webd-assignment5.surge.sh/
