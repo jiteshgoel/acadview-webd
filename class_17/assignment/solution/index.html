@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dynamic Table</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<table id="myTable">
+ <caption>A typical HTML table</caption>  
+  <tr>
+    <th scope="col">Given Name</th>
+    <th scope="col">Family Name</th> 
+    <th scope="col">Age</th>
+  </tr>
+  <tr>
+    <td>Himanshu</td>
+    <td>Batra</td> 
+    <td>52</td>
+  </tr>
+  <tr>
+    <td>Jitesh</td>
+    <td>Goyal</td> 
+    <td>26</td>
+  </tr>
+    <tr>
+    <td>Sandeep</td>
+    <td>Kumar</td> 
+    <td>Unknown</td>
+  </tr>
+</table>
+
+  <input type="text" id="first_name" placeholder="First name here">
+  <input type="text" id="last_name" placeholder="Last name here">
+  <input type="text" id="age" placeholder="Age here">
+  <p>Click to add a new row</p>
+  <button onclick="insertRow();">Add a new row</button>
+  <p>Click to delete the first row of the table</p>
+  <button onclick="deleteFirstRow();">Delete first row</button>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

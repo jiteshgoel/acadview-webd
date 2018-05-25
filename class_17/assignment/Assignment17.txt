@@ -1,0 +1,9 @@
+Step 1: clone/ Download boilerplate code by following commands
+
+git clone  https://github.com/kumarsandeep91/DynamicTableDemo.git
+
+Your task is to improve this web application by accepting input from user via input elements and create new row with that input.
+
+Live version here
+
+http://acadview-webd-assignment17.surge.sh
