@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ES6 Classes</title>
+    <title>Persistance</title>
 	<meta charset="utf-8" />
     <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
+    <h1>Check Dev console -> Application -> localStorage </h1>
+    <br />
     <div id="cForm">
         <h3>Add a new contact</h3>
             Name : <input id="name" type="text" name="name">
@@ -36,8 +38,6 @@
 
     <!-- Your custom script here -->
     <script type="text/babel">
-        var testName; 
-        var contactList; 
         var contlist;
 
         class Contact
@@ -59,6 +59,10 @@
             Add(item)
             {
                 this.contacts.push(item);
+
+                // save to localStorage
+                // remember localStorage can only store string values so use .stringify to convert into string
+                localStorage.contacts = JSON.stringify(this.contacts);
             }
 
             List(filter)
@@ -114,10 +118,10 @@
 
             contlist = new (ContactManager);
 
-            var newItem = new Contact("Name 1", "number1");
-            contlist.Add(newItem);
-            var newItem2 = new Contact("Name 2", "number2");
-            contlist.Add(newItem2);
+            var contact1 = new Contact("Himanshu", "Batra");
+            contlist.Add(contact1);
+            var contact2 = new Contact("Jitesh", "Goyal");
+            contlist.Add(contact2);
 
             document.getElementById("gList").innerHTML = contlist.List("");
         }

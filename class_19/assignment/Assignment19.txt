@@ -1,0 +1,11 @@
+Step 1: clone the boilerplate code by following commands on your terminal/git bash:
+
+git clone https://github.com/kumarsandeep91/PersistanceDemo.git
+
+Step 2: Inside PersistanceDemo folder just downloaded/cloned you will find that this is the solution of assignment 15 (contact manager). 
+
+Now your task is to improve this so that contacts can be saved in localStorage in the browser when we click add contact button.
+
+Live version here
+
+http://acadview-webd-assignment19.surge.sh/
