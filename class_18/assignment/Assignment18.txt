@@ -1,0 +1,11 @@
+Your task is to consume JSON data returned from remote server and use it in your page.
+
+Step 1: Clone/Download
+
+git clone  https://github.com/kumarsandeep91/DynamicGalleryDemo.git
+
+Step 2: Navigate inside downloaded folder and open scripts.js file and follow TODO comments instructions.
+
+Live version here
+
+http://acadview-webd-assignment18.surge.sh/
