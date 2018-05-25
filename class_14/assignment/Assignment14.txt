@@ -1,0 +1,10 @@
+Step 1: clone/ download boilerplate code by following command
+
+git clone https://github.com/kumarsandeep91/JSObjectDemo.git
+
+Step 2: navigate inside downloaded folder and open scripts.js file.
+Follow the TODO comment instructions to complete this task.
+
+Live version here
+
+http://acadview-webd-assignment14.surge.sh/
