@@ -1,0 +1,11 @@
+Step 1: clone/ Download boilerplate code by following commands
+
+git clone  https://github.com/kumarsandeep91/RandomNoDemo.git
+
+Your task is to improve this web application by accepting input from user via input elements and generate a random number between those input values.
+
+Hint: Try looking at Math.random() and Math.floor()
+
+Live version here
+
+http://acadview-webd-assignment16.surge.sh
