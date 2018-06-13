@@ -22,10 +22,6 @@ function checkweather(){
 }
 
 function displayLocationResult(result) {
-    // hide locaion modal
-    // more info check https://getbootstrap.com/docs/3.3/javascript/#modals
-    $('#locationModal').modal('hide');
-
     // get message div
     let msgDiv = document.querySelector("#message");
     // select result div
@@ -51,41 +47,6 @@ function displayLocationResult(result) {
         // clear contents
         div.innerHTML = "";
 
-        // counter
-        // var i = 0;
-        // loop through all the objects in result
-        // result.consolidated_weather.forEach(function(currentResult) {
-        //     let hackedHTMLDiv = `<div class="jumbotron" id="id_${i}"> \
-        //                             <div class="row">
-        //                                 <div class="col-xs-12 col-sm-4">
-        //                                     <h5>${currentResult.weather_state_name}: <small><a target="_blank" href="${currentResult.Domain}">website</a></small></h5>
-        //                                     <h5>Breach Date: <small>${currentResult.BreachDate}</small></h5>
-        //                                     <h5>Added: <small>${currentResult.AddedDate}</small></h5>
-        //                                     <h5>Modified: <small>${currentResult.ModifiedDate}</small></h5>
-        //                                 </div>
-        //                                 <div class="col-xs-12 col-sm-8">
-        //                                     <h5>${currentResult.Name}</h5>
-        //                                     <p>${currentResult.Description}</p>
-        //                                 </div>
-        //                                 <div class="col-xs-12" id="data_id_${i}">
-        //                                     <h5>Compromised data</h5>
-        //                                 </div>
-        //                             </div>
-        //                         </div>`;
-
-        //     // add/append to the result div
-        //     // more info http://api.jquery.com/append/
-        //     $('#result').append(hackedHTMLDiv);
-
-        //     // loop through data classes
-        //     currentResult.DataClasses.forEach(function(currentDataClass) {
-        //         // get and append to compromised data div
-        //         $(`#data_id_${i}`).append(`<span class="label label-danger danger-label">${currentDataClass}</span>`);
-        //     });
-
-        //     // increment counter
-        //     i++;
-        // });
         const weather = result.consolidated_weather;
         console.log(weather);
 
