@@ -1,3 +1,10 @@
 body{
     background-image: url("https://www.thomascook.in/images/currency-img.jpg");
 }
+.input-div {
+    text-align: center;
+}
+.input-div select {
+    width: 100px;
+    height: 30px;
+}

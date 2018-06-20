@@ -1,14 +1,9 @@
 function loadCurrencies(){
     // get base currency
-    let baseCurrency = document.querySelector('base_currency').value;
-
-    if(!baseCurrency) {
-        alert("Currency field is empty");
-        return;
-    }
+    let baseCurrency = document.getElementById("baseCurrency").value;
 
     // query URL
-    let queryURL = "https://exchangeratesapi.io/api/latest?base=" + baseCurrency;
+    let queryURL = `https://exchangeratesapi.io/api/latest?base=${baseCurrency}`;
     
     // make AJAX request using fetch API
     fetch(queryURL)
@@ -30,45 +25,33 @@ function displayCurrencyResult(result) {
     // get message div
     let msgDiv = document.querySelector("#message");
     // select current matches div
-    let div = document.querySelector("#current-matches");
+    let div = document.querySelector("#rates");
 
     // clear contents
     div.innerHTML = "";
 
+    msgDiv.innerHTML = `<div class="">
+                            <div class="jumbotron">
+                                <h1>Base Currency : ${result.base}</h1>  
+                                <h3>${result.date}</h3>    
+                            </div>      
+                        </div>`;
+
     // loop through result
-    result.forEach(function(currentMatch) {
-        // check for live match
-        var status = "";
-        if(currentMatch.matchStarted){
-            status = "Live"
-        }
-        //team1 = currentMatch["team-1"];
-        // create a html div and append it to current matches div
-        let matchDiv = `<div class="col-xs-12 col-sm-6 col-md-4" >
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    ${currentMatch["team-1"]} vs ${currentMatch["team-2"]} <span>${status}</span>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="jumbotron">
-                                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ${currentMatch.dateTimeGMT}
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 text-center">
-                                            <button class="btn btn-primary" onclick="getMatchData(${currentMatch.unique_id});">View</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-footer"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> ${currentMatch.type}</div>
-                            </div>
+
+    for(var key in result.rates){
+        if(result.rates.hasOwnProperty(key)){
+            let rateDiv = `<div class="jumbotron" style="text-align:center">
+                            <h1>${key}</h1>  
+                            <h3 style="color:blue">${result.rates[key]}</h3>    
                         </div>`;
 
         // append it
         // more info http://api.jquery.com/append/
-        $('#current-matches').append(matchDiv);
-    });
+        $('#rates').append(rateDiv);
+        }
+    }
+    
 
     console.log(result);
 }
@@ -99,4 +82,3 @@ function getMatchData(match_id) {
 }
 
 // call the loadCurrencies() after window loads
-window.onload = loadCurrencies;
